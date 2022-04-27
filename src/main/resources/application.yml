@@ -1,0 +1,23 @@
+server:
+  port: 9090
+spring:
+
+  security:
+    user:
+      name: admin
+      password: 1234
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/citizenv
+    username: postgres
+    password: 1234
+    
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: false
+    show-sql: true
+    
+  flyway:
+    enabled: true
+    driver-class-name: org.postgresql.Driver
