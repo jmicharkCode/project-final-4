@@ -3,7 +3,6 @@ package com.example.demo.model;
 
 
 import javax.persistence.CascadeType;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,8 +26,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "citizenv_village")
-public class CitizenvVillage {
+@Table(name = "citizenv_district")
+public class CitizenvDistrict {
 	@Id
 	private String id;
 	
@@ -41,8 +40,8 @@ public class CitizenvVillage {
 	@Enumerated(EnumType.STRING)
 	private Progress progress = Progress.CHƯA_HOÀN_THÀNH;
 	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvCommune.class)
-	@JoinColumn(name = "belongToCommune", referencedColumnName = "id")
-	private CitizenvCommune belongToCommune;
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvProvince.class)
+	@JoinColumn(name = "belongToProvice", referencedColumnName = "id")
+	private CitizenvProvince belongToProvice;
 	
 }
