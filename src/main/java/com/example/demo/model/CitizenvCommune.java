@@ -1,18 +1,24 @@
 package com.example.demo.model;
 
-
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
-
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
 
 import com.example.demo.helper.enumm.Entitle;
 import com.example.demo.helper.enumm.Progress;
@@ -27,8 +33,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 @Entity
-@Table(name = "citizenv_village")
-public class CitizenvVillage {
+@Table(name = "citizenv_commune")
+public class CitizenvCommune {
 	@Id
 	private String id;
 	
@@ -41,8 +47,8 @@ public class CitizenvVillage {
 	@Enumerated(EnumType.STRING)
 	private Progress progress = Progress.CHƯA_HOÀN_THÀNH;
 	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvCommune.class)
-	@JoinColumn(name = "belongToCommune", referencedColumnName = "id")
-	private CitizenvCommune belongToCommune;
+	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvDistrict.class)
+	@JoinColumn(name = "belongToDistrict", referencedColumnName = "id")
+	private CitizenvDistrict belongToDistrict;
 	
 }
