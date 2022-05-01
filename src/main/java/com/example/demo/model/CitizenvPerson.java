@@ -3,7 +3,7 @@ package com.example.demo.model;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,35 +31,43 @@ public class CitizenvPerson {
 	@Type(type = "uuid-char")
 	private UUID id;
 	
+	@Column(name = "hoVaTen")
 	private String hoVaTen;
 	
-	
+	@Column(name = "ngaySinh")
 	private Date ngaySinh;
 	
-		
+	@Column(name = "gioiTinh")
 	private String gioiTinh;
 	
-		
+	@Column(name = "cmnd")
 	private String cmnd;
 	
-	
+	@Column(name = "ngheNghiep")
 	private String ngheNghiep;
 	
-	
+	@Column(name = "danToc")
 	private String danToc;
 	
+	@Column(name = "tonGiao")
 	private String tonGiao;
 	
+	@Column(name = "trinhDoVanHoa")
 	private String trinhDoVanHoa;
 	
+	@Column(name = "diaChiThuongTru")
 	private String diaChiThuongTru;
 	
+	@Column(name = "diaChiTamTru")
 	private String diaChiTamTru;
 	
+	@Column(name = "queQuan")
 	private String queQuan;
 	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvVillage.class)
-	@JoinColumn(name = "belongToVillage", referencedColumnName = "id")
-	private CitizenvVillage belongToVillage;
+	
+	
+	@ManyToOne()
+	@JoinColumn(name = "belongToVillage")
+	private CitizenvVillage village;
 	
 }

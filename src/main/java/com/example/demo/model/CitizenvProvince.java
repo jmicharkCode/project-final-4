@@ -1,15 +1,15 @@
 package com.example.demo.model;
 
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.example.demo.helper.enumm.Entitle;
@@ -28,15 +28,19 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "citizenv_province")
 public class CitizenvProvince {
 	@Id
-	private String id;
+	private String provinceID;
 	
+	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "entitled")
 	@Enumerated(EnumType.STRING)
-	private Entitle entitled = Entitle.KHÔNG;
+	private Entitle entitled = Entitle.Không;
 	
-   
+	@Column(name = "progress")
 	@Enumerated(EnumType.STRING)
-	private Progress progress = Progress.CHƯA_HOÀN_THÀNH;
+	private Progress progress = Progress.Chưa;
 	
+	@OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
+	private List<CitizenvDistrict> districts;
 }

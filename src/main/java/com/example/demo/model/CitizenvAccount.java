@@ -1,16 +1,16 @@
 package com.example.demo.model;
 
-import java.util.Date;
+
+
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -32,24 +32,51 @@ public class CitizenvAccount {
 	@Id
 	private String usernameAccount;
 	
+	@Column(name = "password")
 	private String password;
 	
+	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
 	private Role role;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = CitizenvProvince.class)
-	@JoinColumn(name = "manageToProvince", referencedColumnName = "id")
+	
+	@OneToOne()
+	@JoinColumn(name = "manageToProvince")
 	private CitizenvProvince manageToProvince;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = CitizenvDistrict.class)
-	@JoinColumn(name = "manageToDistrict", referencedColumnName = "id")
-	private CitizenvDistrict manageToDistrict;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = CitizenvCommune.class)
-	@JoinColumn(name = "manageToCommune", referencedColumnName = "id")
+	
+	@OneToOne()
+	@JoinColumn(name = "manageToDistrict")
+	private CitizenvDistrict manageToDistrict;
+
+	
+	
+	@OneToOne()
+	@JoinColumn(name = "manageToCommune")
 	private CitizenvCommune manageToCommune;
 	
-	@OneToOne(cascade = CascadeType.ALL, targetEntity = CitizenvVillage.class)
-	@JoinColumn(name = "manageToVillage", referencedColumnName = "id")
+	@OneToOne()
+	@JoinColumn(name = "manageToVillage")
 	private CitizenvVillage manageToVillage;
+	
+	@OneToMany(mappedBy = "usernameDeclared", cascade = CascadeType.ALL)
+	private List<CitizenvDeclared> declared;
+	
+	/*@OneToOne()
+	@JoinColumn(name = "provinceID")
+	private CitizenvProvince manageProvince;
+	
+	@OneToOne()
+	@JoinColumn(name = "districtID")
+	private CitizenvDistrict manageDistrict;
+	
+	@OneToOne()
+	@JoinColumn(name = "communeID")
+	private CitizenvCommune manageCommune;
+	
+	@OneToOne()
+	@JoinColumn(name = "villageID")
+	private CitizenvVillage manageVillage;*/
 	
 }

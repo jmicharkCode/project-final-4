@@ -1,18 +1,14 @@
 package com.example.demo.model;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
@@ -34,13 +30,18 @@ public class CitizenvDeclared {
 	@Type(type = "uuid-char")
 	private UUID id;
 	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvAccount.class)
-	@JoinColumn(name = "usernameDeclared", referencedColumnName = "usernameAccount")
-	private CitizenvAccount username;
+	@ManyToOne()
+	@JoinColumn(name = "usernameDeclared")
+	private CitizenvAccount usernameDeclared;
 	
-	
+	@Column(name = "startTime")
 	private Date startTime;
 	
+	@Column(name = "endTime")
 	private Date endTime;
+	
+	/*@ManyToOne()
+	@JoinColumn(name = "usernameAccount")
+	private CitizenvVillage account;*/
 	
 }
