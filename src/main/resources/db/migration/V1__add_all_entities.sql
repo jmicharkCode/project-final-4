@@ -15,42 +15,42 @@ CREATE TABLE citizenv_person (
   PRIMARY KEY ( id )
 );
 CREATE TABLE citizenv_village (
-  id varchar(50) NOT NULL,
+  villageID varchar(50) NOT NULL,
   name varchar(50) NOT NULL,
   entitled varchar(50) DEFAULT 'Không',
   progress varchar(50) NOT NULL DEFAULT 'Chưa Hoàn Thành',
   belongToCommune varchar(50) NOT NULL,
-  PRIMARY KEY ( id ) 
+  PRIMARY KEY ( villageID ) 
 );
 CREATE TABLE citizenv_commune (
-  id varchar(50) NOT NULL,
+  communeID varchar(50) NOT NULL,
   name varchar(50) NOT NULL,
   entitled varchar(50) DEFAULT 'Không',
   progress varchar(50) NOT NULL DEFAULT 'Chưa Hoàn Thành',
   belongToDistrict varchar(50) NOT NULL,
-  PRIMARY KEY ( id )
+  PRIMARY KEY ( communeID )
 );
 CREATE TABLE citizenv_district (
-  id varchar(50) NOT NULL,
+  districtID varchar(50) NOT NULL,
   name varchar(50) NOT NULL,
   entitled varchar(50) DEFAULT 'Không',
   progress varchar(50) NOT NULL DEFAULT 'Chưa Hoàn Thành',
   belongToProvince varchar(50) NOT NULL,
-  PRIMARY KEY ( id )
+  PRIMARY KEY ( districtID )
 );
 CREATE TABLE citizenv_province (
-  id varchar(50) NOT NULL,
+  provinceID varchar(50) NOT NULL,
   name varchar(50) NOT NULL,
   entitled varchar(50) DEFAULT 'Không',
-  progress varchar(50) NOT NULL DEFAULT 'Chưa Hoàn Thành',
-  PRIMARY KEY ( id )
+  progress varchar(50) NOT NULL DEFAULT 'Chưa',
+  PRIMARY KEY ( provinceID )
 );
 CREATE TABLE citizenv_declared (
-  id varchar(255),
+  declaredID varchar(255),
   usernameDeclared varchar(50) NOT NULL,
   startTime date NOT NULL,
   endTime date NOT NULL,
-  PRIMARY KEY ( id )
+  PRIMARY KEY ( declaredID )
 );
 CREATE TABLE citizenv_account (
   usernameAccount varchar(50) NOT NULL,
@@ -66,21 +66,21 @@ CREATE TABLE citizenv_account (
 
 
 ALTER TABLE citizenv_person
-  ADD CONSTRAINT FK_PERSON_VILLAGE FOREIGN KEY (belongToVillage) REFERENCES citizenv_village(id);
+  ADD CONSTRAINT FK_PERSON_VILLAGE FOREIGN KEY (belongToVillage) REFERENCES citizenv_village(villageID);
 ALTER TABLE citizenv_village
-  ADD CONSTRAINT FK_VILLAGE_COMMUNE FOREIGN KEY (belongToCommune) REFERENCES citizenv_commune(id);
+  ADD CONSTRAINT FK_VILLAGE_COMMUNE FOREIGN KEY (belongToCommune) REFERENCES citizenv_commune(communeID);
 ALTER TABLE citizenv_commune
-  ADD CONSTRAINT FK_COMMUNE_DISTRICT FOREIGN KEY (belongToDistrict) REFERENCES citizenv_district(id);
+  ADD CONSTRAINT FK_COMMUNE_DISTRICT FOREIGN KEY (belongToDistrict) REFERENCES citizenv_district(districtID);
 ALTER TABLE citizenv_district
-  ADD CONSTRAINT FK_DISTRICT_PROVINCE FOREIGN KEY (belongToProvince) REFERENCES citizenv_province(id);
+  ADD CONSTRAINT FK_DISTRICT_PROVINCE FOREIGN KEY (belongToProvince) REFERENCES citizenv_province(provinceID);
 ALTER TABLE citizenv_account
-  ADD CONSTRAINT FK_ACCOUNT_PROVINCE FOREIGN KEY (manageToProvince) REFERENCES citizenv_province(id);
+  ADD CONSTRAINT FK_ACCOUNT_PROVINCE FOREIGN KEY (manageToProvince) REFERENCES citizenv_province(provinceID);
 ALTER TABLE citizenv_account
-  ADD CONSTRAINT FK_ACCOUNT_DISTRICT FOREIGN KEY (manageToDistrict) REFERENCES citizenv_district(id);
+  ADD CONSTRAINT FK_ACCOUNT_DISTRICT FOREIGN KEY (manageToDistrict) REFERENCES citizenv_district(districtID);
 ALTER TABLE citizenv_account
-  ADD CONSTRAINT FK_ACCOUNT_COMMUNE FOREIGN KEY (manageToCommune) REFERENCES citizenv_commune(id);
+  ADD CONSTRAINT FK_ACCOUNT_COMMUNE FOREIGN KEY (manageToCommune) REFERENCES citizenv_commune(communeID);
 ALTER TABLE citizenv_account
-  ADD CONSTRAINT FK_ACCOUNT_VILLAGE FOREIGN KEY (manageToVillage) REFERENCES citizenv_village(id);
+  ADD CONSTRAINT FK_ACCOUNT_VILLAGE FOREIGN KEY (manageToVillage) REFERENCES citizenv_village(villageID);
 ALTER TABLE citizenv_declared
   ADD CONSTRAINT FK_DECLARED_ACCOUNT FOREIGN KEY (usernameDeclared) REFERENCES citizenv_account(usernameAccount);
  

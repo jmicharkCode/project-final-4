@@ -5,5 +5,6 @@ public enum Role {
 	A2,
 	A3,
 	B1,
-	B2
+	B2,
+	ADMIN
 }

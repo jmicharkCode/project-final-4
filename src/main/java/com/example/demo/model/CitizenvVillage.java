@@ -2,20 +2,22 @@ package com.example.demo.model;
 
 
 
-import javax.persistence.CascadeType;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.demo.helper.enumm.Entitle;
 import com.example.demo.helper.enumm.Progress;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,19 +32,27 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "citizenv_village")
 public class CitizenvVillage {
 	@Id
-	private String id;
+	private String villageID;
 	
+	@Column(name = "name")
 	private String name;
 	
+	@Column(name = "entitled")
 	@Enumerated(EnumType.STRING)
-	private Entitle entitled = Entitle.KHÔNG;
+	private Entitle entitled = Entitle.Không;
 	
-   
+	@Column(name = "progress")
 	@Enumerated(EnumType.STRING)
-	private Progress progress = Progress.CHƯA_HOÀN_THÀNH;
+	private Progress progress = Progress.Chưa;
 	
-	@ManyToOne(cascade = CascadeType.ALL, targetEntity = CitizenvCommune.class)
-	@JoinColumn(name = "belongToCommune", referencedColumnName = "id")
-	private CitizenvCommune belongToCommune;
+
+	
+	@ManyToOne()
+	@JoinColumn(name = "belongToCommune")
+	private CitizenvCommune commune;
+	
+	@OneToMany(mappedBy = "village", cascade = CascadeType.ALL)
+	private List<CitizenvPerson> persons;
+	
 	
 }
